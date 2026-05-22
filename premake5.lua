@@ -26,15 +26,26 @@ project "Tasking"
 
     libdirs 
     {
-        "%{wks.location}/dep/GLFW/lib-vc2022"
+        "%{wks.location}/dep/GLFW/lib-vc2022",
+        "%{wks.location}/dep/GLFW/lib-mingw-w64"
     }
 
-    links
-    {
-        "opengl32.lib",
-        "glfw3.lib"
-    }
+    filter { "action:codelite" }
+        links
+        {
+            "opengl32",
+            "libglfw3"
+        }
+    
+    filter { "action:vs2022" }
+        links
+        {
+            "opengl32.lib",
+            "glfw3.lib"
+        }
 
+    filter {}
+    
     filter { "platforms:x64", "configurations:Debug" }
         system "Windows"
         defines { "DEBUG" }

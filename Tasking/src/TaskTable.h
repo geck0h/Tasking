@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <cstdint>
 
 enum class Day {
 	MONDAY = 0,
