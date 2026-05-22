@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "TaskTable.h"
+#include "GLFW/glfw3.h"
 
 int main()
 {
