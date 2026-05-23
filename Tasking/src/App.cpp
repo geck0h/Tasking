@@ -39,7 +39,6 @@ void App::run()
 {
     while (!glfwWindowShouldClose(m_window))
     {
-        std::cout << "Hello\n";
 
     }
 }

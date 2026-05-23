@@ -26,24 +26,28 @@ project "Tasking"
         "%{prj.name}/src/*.h"
     }
 
-    libdirs 
-    {
-        "%{wks.location}/dep/GLFW/lib-vc2022",
-        "%{wks.location}/dep/GLFW/lib-mingw-w64",
-        "%{wks.location}/dep/GLEW/lib/Release/x64"
-    }
-
-    -- TODO: compile glew for MINGW
     filter { "configurations:DebugMINGW or ReleaseMINGW" }
+        libdirs
+        {
+            "%{wks.location}/dep/GLFW/lib-mingw-w64/",
+            "%{wks.location}/dep/GLEW/lib/mingw/"
+        }
+
         links
         {
+            "glfw3",
+            "glew32",
             "opengl32",
-            "libglfw3",
-            "glew32s",
             "gdi32"
         }
     
     filter { "configurations:DebugMSVC or ReleaseMSVC" }
+        libdirs 
+        {
+            "%{wks.location}/dep/GLFW/lib-vc2022/",
+            "%{wks.location}/dep/GLEW/lib/msvc/Release/x64/",
+        }
+
         links
         {
             "opengl32.lib",
