@@ -15,34 +15,41 @@ project "Tasking"
 
     includedirs
     {
-        "%{wks.location}/dep/GLFW/include"
+        "%{prj.name}/src/",
+        "%{wks.location}/dep/GLFW/include/",
+        "%{wks.location}/dep/GLEW/include/"
     }
 
     files 
     { 
         "%{prj.name}/src/*.cpp",
-        "%{prj.name}/src/*.h",
+        "%{prj.name}/src/*.h"
     }
 
     libdirs 
     {
         "%{wks.location}/dep/GLFW/lib-vc2022",
-        "%{wks.location}/dep/GLFW/lib-mingw-w64"
+        "%{wks.location}/dep/GLFW/lib-mingw-w64",
+        "%{wks.location}/dep/GLEW/lib/Release/x64"
     }
 
-
+    -- TODO: compile glew for MINGW
     filter { "configurations:DebugMINGW or ReleaseMINGW" }
         links
         {
             "opengl32",
-            "libglfw3"
+            "libglfw3",
+            "glew32s",
+            "gdi32"
         }
     
     filter { "configurations:DebugMSVC or ReleaseMSVC" }
         links
         {
             "opengl32.lib",
-            "glfw3.lib"
+            "glfw3.lib",
+            "glew32s.lib",
+            "gdi32.lib"
         }
 
     filter {}
