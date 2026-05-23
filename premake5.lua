@@ -1,5 +1,5 @@
 workspace "Tasking" 
-    configurations { "Debug", "Release" }
+    configurations { "DebugMINGW", "ReleaseMINGW", "DebugMSVC", "ReleaseMSVC" }
     platforms { "x64" }
     language "C++" 
     cppdialect "C++17" 
@@ -30,14 +30,15 @@ project "Tasking"
         "%{wks.location}/dep/GLFW/lib-mingw-w64"
     }
 
-    filter { "action:codelite" }
+
+    filter { "configurations:DebugMINGW or ReleaseMINGW" }
         links
         {
             "opengl32",
             "libglfw3"
         }
     
-    filter { "action:vs2022" }
+    filter { "configurations:DebugMSVC or ReleaseMSVC" }
         links
         {
             "opengl32.lib",
@@ -45,17 +46,19 @@ project "Tasking"
         }
 
     filter {}
-    
-    filter { "platforms:x64", "configurations:Debug" }
+
+    filter { "platforms:x64", "configurations:DebugMSVC", "configurations:DebugMINGW" }
         system "Windows"
         defines { "DEBUG" }
         runtime "Debug"
         optimize "Debug"
 
-    filter { "platforms:x64", "configurations:Release" }
+    filter { "platforms:x64", "configurations:ReleaseMSVC", "configurations:ReleaseMINGW" }
         system "Windows"
         defines { "NDEBUG" }
         runtime "Release"
         optimize "Speed"
+
+    filter{}
 
 

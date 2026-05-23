@@ -21,7 +21,9 @@ int main()
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
-
+    
+    glClearColor(0.0f, 2.0f, 7.0f, 1.0f);
+    
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -37,18 +39,4 @@ int main()
 
     glfwTerminate();
     return 0;
-    
-	TaskTable tasktable(7);
-	tasktable.onDay(0).addTask("Task name");
-	tasktable.onDay(0).addTask("Task name 2");
-
-	tasktable.onDay(0).tickTask("Task name");
-
-	std::cout << tasktable.onDay(0).checkTask("Task name") << std::endl;
-    
-	//tasktable.onDay(Day::MONDAY).removeTask("Task name");
-
-	std::cout << tasktable.onDay(0).viewPercentFinished();
-
-	std::cin.get();
 }
