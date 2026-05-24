@@ -1,65 +1,63 @@
 #include "TaskTable.h"
 
-void TaskDay::addTask(const std::string& taskName) 
+void TaskDay::AddTask(const std::string& taskName) 
 {
-    tasks.push_back({ taskName, false });
+    m_tasks.push_back({ taskName, false });
 }
 
-void TaskDay::removeTask(const std::string& taskName) 
+void TaskDay::RemoveTask(const std::string& taskName) 
 {
-    for (int i = 0; i < tasks.size(); i++)
+    for (size_t i = 0; i < m_tasks.size(); i++)
     {
-        if (taskName == tasks[i]._taskName)
+        if (taskName == m_tasks[i].taskName)
         {
-            tasks.erase(tasks.begin() + i);
+            m_tasks.erase(m_tasks.begin() + i);
             return;
         }
     }
 }
 
-void TaskDay::tickTask(const std::string& taskName) 
+void TaskDay::TickTask(const std::string& taskName) 
 {
-    for (Task& task : tasks)
+    for (Task& task : m_tasks)
     {
-        if (task._taskName == taskName && !task._isCompleted)
+        if (task.taskName == taskName && !task.isCompleted)
         {
-            task._isCompleted = true;
+            task.isCompleted = true;
             return;
         }
     }
 }
 
-bool TaskDay::checkTask(const std::string& taskName) const
+bool TaskDay::CheckTask(const std::string& taskName) const
 {
-    for (const Task& task : tasks)
+    for (const Task& task : m_tasks)
     {
-        if (task._taskName == taskName)
-            return task._isCompleted;
+        if (task.taskName == taskName)
+            return task.isCompleted;
     }
     return false;
 }
 
-float TaskDay::viewPercentFinished() const
+float TaskDay::ViewPercentFinished() const
 {
-    int totalTasks = 0;
     int finishedTasks = 0;
-    for (const Task& task : tasks)
+    for (const Task& task : m_tasks)
     {
-        totalTasks++;
-        if (task._isCompleted)
+        if (task.isCompleted)
             finishedTasks++;
     }
-    return static_cast<float>(finishedTasks) / static_cast<float>(totalTasks) * 100.0f;
+    return static_cast<float>(finishedTasks) / static_cast<float>(m_tasks.size()) * 100.0f;
 }
 
 ///////////////////////////////////
 
-[[nodiscard]] TaskDay& TaskTable::onDay(Day day)
+[[nodiscard]] TaskDay& TaskTable::OnDay(Day day)
 {
     return m_taskDays[static_cast<int>(day)];
 }
 
-[[nodiscard]] TaskDay& TaskTable::onDay(unsigned int day) 
+[[nodiscard]] TaskDay& TaskTable::OnDay(unsigned int day) 
 {
     return m_taskDays[day];
 }

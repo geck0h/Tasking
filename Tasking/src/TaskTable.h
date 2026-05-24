@@ -5,18 +5,18 @@
 #include <cstdint>
 
 enum class Day {
-    MONDAY = 0,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    SUNDAY
+    Monday = 0,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
 };
 
 struct Task {
-    std::string _taskName;
-    bool _isCompleted;
+    std::string taskName;
+    bool isCompleted;
 };
 
 ///////////////////////////////////
@@ -25,14 +25,14 @@ class TaskDay {
 public:
     TaskDay() = default;
 
-    void addTask(const std::string& taskName);
-    void removeTask(const std::string& taskName);
-    void tickTask(const std::string& taskName);
-    bool checkTask(const std::string& taskName) const;
+    void AddTask(const std::string& taskName);
+    void RemoveTask(const std::string& taskName);
+    void TickTask(const std::string& taskName);
+    bool CheckTask(const std::string& taskName) const;
 
-    float viewPercentFinished() const;
+    float ViewPercentFinished() const;
 private:
-    std::vector<Task> tasks;
+    std::vector<Task> m_tasks;
 };
 
 ///////////////////////////////////
@@ -43,8 +43,8 @@ public:
     TaskTable(uint64_t days = 7)
         : m_taskDays(days) {}
 
-    [[nodiscard]] TaskDay& onDay(Day day);
-    [[nodiscard]] TaskDay& onDay(unsigned int day);
+    [[nodiscard]] TaskDay& OnDay(Day day);
+    [[nodiscard]] TaskDay& OnDay(unsigned int day);
 
 private:
     std::vector<TaskDay> m_taskDays;

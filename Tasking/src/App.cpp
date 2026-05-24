@@ -1,50 +1,54 @@
 #include "App.h"
 
-#include <iostream>
-
-#include "Renderer.h"
-
-void App::init()
+void App::Init()
 {
     /* Initialize the library */
     glfwInit();
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    
     /* Create a windowed mode window and its OpenGL context */
     m_window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(m_window);
 
+    glewExperimental = GL_TRUE;
     glewInit();
 
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.2f, 0.3f, 0.5f, 1.0f);
+    
+    Callback callback(m_window);
 
-    /* Loop until the user closes the window */
+    m_renderer = new Renderer;
+}
+
+void App::Run()
+{
     while (!glfwWindowShouldClose(m_window))
     {
-        /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(m_window);
+        
+        m_renderer->Draw();
 
+        glDrawArrays(GL_TRIANGLES, 0, 3);
         /* Poll for and process events */
         glfwPollEvents();
     }
+}
 
+void App::Shutdown()
+{
     glfwTerminate();
 }
 
-void App::run()
+void App::OnKey(int key, int action)
 {
-    while (!glfwWindowShouldClose(m_window))
-    {
-
-    }
+    if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(m_window, true);
 }
-
-void App::shutdown()
-{
-    
-}
-
