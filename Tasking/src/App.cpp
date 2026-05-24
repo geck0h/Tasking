@@ -31,12 +31,10 @@ void App::Run()
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(m_window);
-        
         m_renderer->Draw();
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        /* Swap front and back buffers */
+        glfwSwapBuffers(m_window);
         /* Poll for and process events */
         glfwPollEvents();
     }

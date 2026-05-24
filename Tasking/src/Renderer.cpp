@@ -22,6 +22,7 @@ Renderer::Renderer()
 void Renderer::Draw() const
 {
     m_shader.Use();
+    glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
