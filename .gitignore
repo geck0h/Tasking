@@ -1,0 +1,6 @@
+*.sln
+*.workspace
+bin/
+.vs/
+*.vcxproj
+*.user

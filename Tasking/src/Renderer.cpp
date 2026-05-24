@@ -11,7 +11,7 @@ Renderer::Renderer()
     float vertices[] = {
         -0.5f, -0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
-         0.0f, -0.5f, 0.0f
+         0.0f,  0.5f, 0.0f
     };
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 

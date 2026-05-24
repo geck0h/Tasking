@@ -2,8 +2,6 @@
 
 #include "GLheaders.h"
 
-#include "App.h"
-
 class Callback
 {
 public:
